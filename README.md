@@ -1,3 +1,3 @@
 # Cookie-Clicker
-poggers
-Hello mitta bodet, welcome to cokie clicer
+こんにちは mr bosdert. this ir s nous proyecto. 
+ありがとうございました
