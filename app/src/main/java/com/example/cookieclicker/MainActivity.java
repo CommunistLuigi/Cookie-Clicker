@@ -11,8 +11,9 @@ import java.util.Timer;
 public class MainActivity extends AppCompatActivity implements Runnable{
 
     public long cookies = 0;
-   public int cookiesPerClick = 1;
+    public int cookiesPerClick = 1;
     public Timer timer;
+
 
     ArrayList<Autoclicker> autoClickers;
     public MainActivity(){
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         autoClickers = new ArrayList<>();
 
@@ -48,21 +50,19 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
     }
 
-    //internal handler class;
-    class CookieHandler implements Runnable{
 
+    public void buttonPressed(View view){
 
-        @Override
-        public void run() {
+            switch(view.getId()) {
 
-        }
-
-        public void buttonPressed(View view){
-            cookies += cookiesPerClick;
-            displayCookies();
+                case R.id.cookie_button:
+                cookies += cookiesPerClick;
+                displayCookies();
+                break;
+            }
         }
 
 
 
     }
-}
+
