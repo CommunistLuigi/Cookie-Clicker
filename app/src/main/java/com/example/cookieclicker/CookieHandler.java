@@ -18,7 +18,7 @@ public class CookieHandler implements WifiP2pManager.ActionListener {
     public void onFailure(int i) {
 
     }
-    public static void buttonPressed(View view){
+    public void buttonPressed(View view){
 
         if(view.getId() == R.id.cookie_button) {
 
