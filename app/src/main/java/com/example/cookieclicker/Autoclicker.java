@@ -1,6 +1,9 @@
 package com.example.cookieclicker;
 
-public class Autoclicker {
+import java.util.TimerTask;
+
+
+public class Autoclicker extends TimerTask{
 
     int cookiesPerSecond, stacks;
 
@@ -13,7 +16,8 @@ public class Autoclicker {
         this.stacks += stacks;
     }
 
-    public int generateCookies(){
-        return cookiesPerSecond*stacks;
+    @Override
+    public void run(){
+
     }
 }

@@ -1,13 +1,11 @@
 package com.example.cookieclicker;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
 import java.util.ArrayList;
 import java.util.Timer;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Runnable{
 
     int cookies = 0;
 
@@ -17,9 +15,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        autoClickers = new ArrayList<>();
     }
 
-    public void setTimer(){
-        Timer timer = new Timer();
+
+    @Override
+    public void run(){
+        for(Autoclicker autoclicker : autoClickers){
+            autoclicker.run();
+        }
     }
+
 }
