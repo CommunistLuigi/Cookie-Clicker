@@ -8,11 +8,14 @@ import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity implements Runnable{
 
-    long cookies = 0;
-    int cookiesPerClick = 1;
-    Timer timer;
+    public static long cookies = 0;
+   public static int cookiesPerClick = 1;
+    public Timer timer;
 
     ArrayList<Autoclicker> autoClickers;
+    public MainActivity(){
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +33,14 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         }
     }
 
-    public void generateCookies(View view){
-        cookies += cookiesPerClick;
-        displayCookies();
+
+
+    public static void displayCookies(){
+        //code to display cookies
     }
 
-    public void displayCookies(){
-        //code to display cookies
+    public void setTimer(){
+        timer = new Timer(String.valueOf(1000));
+
     }
 }
