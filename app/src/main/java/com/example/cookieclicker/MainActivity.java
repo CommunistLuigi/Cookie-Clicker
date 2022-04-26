@@ -7,7 +7,8 @@ import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity implements Runnable{
 
-    int cookies = 0;
+    long cookies = 0;
+    int cookiesPerClick = 1;
 
     ArrayList<Autoclicker> autoClickers;
 
