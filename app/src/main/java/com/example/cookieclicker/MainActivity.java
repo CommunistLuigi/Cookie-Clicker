@@ -2,6 +2,7 @@ package com.example.cookieclicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -24,7 +25,16 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     public void run(){
         for(Autoclicker autoclicker : autoClickers){
             autoclicker.run();
+
         }
     }
 
+    public void generateCookies(View view){
+        cookies += cookiesPerClick;
+        displayCookies();
+    }
+
+    public void displayCookies(){
+        //code to display cookies
+    }
 }
