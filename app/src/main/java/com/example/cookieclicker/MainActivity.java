@@ -12,7 +12,9 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
     public long cookies = 0;
     public int cookiesPerClick = 1;
+    public double cookiesPerSecond;
     public Timer timer;
+    public int cursors, grandmas, bakers;
 
 
     ArrayList<Autoclicker> autoClickers;
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                 cookies += cookiesPerClick;
                 displayCookies();
                 break;
+
+
             }
         }
 
