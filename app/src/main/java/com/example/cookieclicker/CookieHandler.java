@@ -1,14 +1,14 @@
 package com.example.cookieclicker;
 
-import static com.example.cookieclicker.MainActivity.cookiesPerClick;
-
 import android.net.wifi.p2p.WifiP2pManager;
 import android.view.View;
-import static com.example.cookieclicker.MainActivity.*;
+
+import com.example.cookieclicker.MainActivity.*;
 
 public class CookieHandler implements WifiP2pManager.ActionListener {
 
-
+        long cookies = MainActivity.cookies;
+        int cookiesPerClick = MainActivity.cookiesPerClick;
     @Override
     public void onSuccess() {
 
