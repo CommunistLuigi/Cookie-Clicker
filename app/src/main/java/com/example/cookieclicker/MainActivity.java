@@ -3,6 +3,8 @@ package com.example.cookieclicker;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         autoClickers = new ArrayList<>();
+
     }
 
 
@@ -35,8 +38,9 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
 
 
-    public static void displayCookies(){
-        //code to display cookies
+    public void displayCookies(){
+        TextView textView = (TextView)findViewById(R.id.cookie_counter);
+        textView.setText(String.valueOf(cookies));
     }
 
     public void setTimer(){
