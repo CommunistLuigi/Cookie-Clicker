@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements Runnable{
 
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     public int cookiesPerClick = 1;
     public double cookiesPerSecond;
     public Timer timer;
+    public TimerTask timerTask;
     public boolean timerOn;
     public int cursors, grandmas, bakers;
     //how many cookies/sec each autoclicker gives
@@ -31,9 +33,19 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        timerOn = false;
         setContentView(R.layout.activity_main);
         autoClickers = new ArrayList<>();
+        timerOn = false;
+        timerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+                cookies += cookiesPerSecond;
+                displayCookies();
+            }
+        };
+        timer.schedule(timerTask, 0, 1000);
+
 
     }
 
