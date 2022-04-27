@@ -15,7 +15,12 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     public double cookiesPerSecond;
     public Timer timer;
     public int cursors, grandmas, bakers;
-
+    //how many cookies/sec each autoclicker gives
+    public final double CURSOR_MULTIPLIER = 0.1;
+    public final double GRANDMA_MULTIPLIER = 0.5;
+    public final double BAKER_MULTIPLIER = 1;
+    //what the price of each autoclicker is multiplied by each time you buy one
+    public final double PRICE_MULTIPLIER = 1.1;
 
     ArrayList<Autoclicker> autoClickers;
     public MainActivity(){
@@ -31,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
     }
 
-
     @Override
     public void run(){
         for(Autoclicker autoclicker : autoClickers){
@@ -39,8 +43,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
         }
     }
-
-
 
     public void displayCookies(){
         TextView textView = (TextView)findViewById(R.id.cookie_counter);
@@ -65,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
             }
         }
-
 
 
     }
