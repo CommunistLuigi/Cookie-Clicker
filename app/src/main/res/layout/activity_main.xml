@@ -8,6 +8,8 @@
         android:id = "@+id/cookie_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text_size="16dp"
+        android:text="0"
         />
     <Button
         android:id = "@+id/cookie_button"
@@ -16,5 +18,10 @@
         android:onClick="buttonPressed"
         android:layout_centerInParent="true"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buy Screen"
+        android:onClick="buttonPressed"
 
 </RelativeLayout>
