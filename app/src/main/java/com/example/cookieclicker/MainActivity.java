@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     public int cookiesPerClick = 1;
     public double cookiesPerSecond;
     public Timer timer;
+    public boolean timerOn;
     public int cursors, grandmas, bakers;
     //how many cookies/sec each autoclicker gives
     public final double CURSOR_MULTIPLIER = 0.1;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        timerOn = false;
         setContentView(R.layout.activity_main);
         autoClickers = new ArrayList<>();
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     }
 
     public void setTimer(){
-        timer = new Timer(String.valueOf(1000));
+        timer = new Timer();
 
     }
 
