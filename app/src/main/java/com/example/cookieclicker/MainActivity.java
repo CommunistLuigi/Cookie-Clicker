@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements Runnable{
+public class MainActivity extends AppCompatActivity{
 
     public long cookies = 0;
     public int cookiesPerClick = 1;
     public double cookiesPerSecond;
     public Timer timer;
     public TimerTask timerTask;
+    TextView textView;
     public boolean timerOn;
     public int cursors, grandmas, bakers;
     //how many cookies/sec each autoclicker gives
@@ -26,16 +27,18 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     public final double PRICE_MULTIPLIER = 1.1;
 
     ArrayList<Autoclicker> autoClickers;
-    public MainActivity(){
-
-    }
+//    public MainActivity(){
+//
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        textView = (TextView)findViewById(R.id.cookie_counter);
         autoClickers = new ArrayList<>();
         timerOn = false;
+        setTimer();
         timerTask = new TimerTask() {
 
             @Override
@@ -49,17 +52,11 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
     }
 
-    @Override
-    public void run(){
-        for(Autoclicker autoclicker : autoClickers){
-            autoclicker.run();
 
-        }
-    }
 
     public void displayCookies(){
-        TextView textView = (TextView)findViewById(R.id.cookie_counter);
-        textView.setText(String.valueOf(cookies));
+
+        textView.setText("" + cookies);
     }
 
     public void setTimer(){
