@@ -1,24 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent">
 
     <Button
         android:id = "@+id/switch_activity_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:onClick = "buttonPressed"
         />
+
     <TextView
         android:id = "@+id/shop_cookie_counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:text = "0"
+        android:layout_alignParentTop = "true"
+        android:layout_centerHorizontal="true"
         />
+
     <TextView
         android:id = "@+id/quantity_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:layout_below = "@id/shop_cookie_counter"
         />
 
+    <Button
+        android:id = "@+id/decrease_quantity"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:onClick = "buttonPressed"
+        android:layout_alignLeft = "@id/quantity_text_view"
+        />
 
+    <Button
+        android:id = "@+id/decrease_quantity_five"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:onClick = "buttonPressed"
+        android:layout_alignLeft = "@id/decrease_quantity"
+        />
+
+    <Button
+        android:id = "@+id/increase_quantity"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:onClick = "buttonPressed"
+        android:layout_alignRight = "@id/quantity_text_view"
+        />
+
+    <Button
+        android:id = "@+id/increase_quantity_five"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:onClick = "buttonPressed"
+        android:layout_alignRight = "@id/increase_quantity"
+        />
 
 </RelativeLayout>
