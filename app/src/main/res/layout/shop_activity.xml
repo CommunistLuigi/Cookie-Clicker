@@ -6,10 +6,12 @@
 
     <!-- button to switch activities-->
     <Button
-        android:id = "@+id/switch_activity_button"
+        android:id = "@+id/back_to_main_button"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:onClick = "buttonPressed"
+        android:layout_alignParentBottom = "true"
+        android:layout_centerHorizontal = "true"
         />
 
     <!-- shows how many cookies you have -->
@@ -20,6 +22,7 @@
         android:text = "0"
         android:layout_alignParentTop = "true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom = "8dp"
         />
 
     <!-- shows how many autoclickers you would currently buy-->
@@ -28,6 +31,8 @@
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:layout_below = "@id/shop_cookie_counter"
+        android:marginRight = "8dp"
+        android:marginLeft = "8dp"
         />
 
     <!-- buttons for changing how many autoclickers you want to buy-->
@@ -37,6 +42,7 @@
         android:layout_height = "wrap_content"
         android:onClick = "buttonPressed"
         android:layout_alignLeft = "@id/quantity_text_view"
+        android:layout_marginLeft = "8dp"
         />
 
     <Button
@@ -53,6 +59,7 @@
         android:layout_height = "wrap_content"
         android:onClick = "buttonPressed"
         android:layout_alignRight = "@id/quantity_text_view"
+        android:layout_marginRight = "8dp"
         />
 
     <Button
@@ -68,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_below = "@id/quantity_text_view"
         >
 
         <Button
