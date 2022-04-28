@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity{
     //what the price of each autoclicker is multiplied by each time you buy one
     public final double PRICE_MULTIPLIER = 1.1;
 
+    Object cookieLock;
+
     ArrayList<Autoclicker> autoClickers;
 //    public MainActivity(){
 //
@@ -38,7 +40,9 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = (TextView)findViewById(R.id.cookie_counter);
+        cookies = 0;
         cookiesPerSecond = 0;
+        cookieLock = new Object();
         autoClickers = new ArrayList<>();
         timerOn = false;
         setTimer();
@@ -46,8 +50,10 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void run() {
-                cookies += cookiesPerSecond;
-               displayCookies();
+                synchronized (cookieLock) {
+                    cookies += cookiesPerSecond;
+                    displayCookies();
+                }
             }
         };
         timer.schedule(timerTask, 0, 1000);
@@ -59,8 +65,12 @@ public class MainActivity extends AppCompatActivity{
 
     @SuppressLint("SetTextI18n")
     public void displayCookies(){
+        try {
+            textView.setText("" + cookies);
+        }
+        catch(Exception e){
 
-        textView.setText("" + cookies);
+        }
     }
 
     public void setTimer(){
