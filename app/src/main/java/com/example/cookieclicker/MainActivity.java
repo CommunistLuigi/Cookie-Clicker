@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity{
     public final double BAKER_MULTIPLIER = 1;
     //what the price of each autoclicker is multiplied by each time you buy one
     public final double PRICE_MULTIPLIER = 1.1;
+    public boolean onShopScreen = false;
 
     Object cookieLock;
 
@@ -78,6 +79,17 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if(onShopScreen){
+            setContentView(R.layout.activity_main);
+            onShopScreen = false;
+        }
+        else{
+            super.onBackPressed();
+        }
+
+    }
 
     @SuppressLint("NonConstantResourceId")
     public void buttonPressed(View view){
@@ -90,9 +102,11 @@ public class MainActivity extends AppCompatActivity{
                 break;
                 case R.id.buy_screen_button:
                     setContentView(R.layout.shop_activity);
+                    onShopScreen = true;
                 break;
                 case R.id.shop_cookie_counter:
                     setContentView(R.layout.activity_main);
+                    onShopScreen = false;
 
             }
         }
