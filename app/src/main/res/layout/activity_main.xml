@@ -3,29 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
+    <!--Current Cookie #-->
     <TextView
         android:id = "@+id/cookie_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:text_size="16dp"
         android:text="0"
-         />
+        />
+    <!--Get more Cookies Button-->
     <Button
         android:id = "@+id/cookie_button"
-        android:text="POW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="buttonPressed"
         android:layout_centerInParent="true"
         />
-
+    <!--Swap to Buy screen-->
     <Button
-        android:id="@+id/buy_screen_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:text="Buy Screen"
         android:onClick="buttonPressed"
-        android:text="Buy Screen" />
+        android:id="@+id/buy_screen_button"
+        />
 
 </RelativeLayout>
