@@ -1,6 +1,8 @@
 package com.example.cookieclicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = (TextView)findViewById(R.id.cookie_counter);
+        cookiesPerSecond = 0;
         autoClickers = new ArrayList<>();
         timerOn = false;
         setTimer();
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void run() {
                 cookies += cookiesPerSecond;
-                displayCookies();
+               displayCookies();
             }
         };
         timer.schedule(timerTask, 0, 1000);
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
+    @SuppressLint("SetTextI18n")
     public void displayCookies(){
 
         textView.setText("" + cookies);
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     public void buttonPressed(View view){
 
             switch(view.getId()) {
@@ -73,7 +78,11 @@ public class MainActivity extends AppCompatActivity{
                 cookies += cookiesPerClick;
                 displayCookies();
                 break;
-
+                case R.id.buy_screen_button:
+                    setContentView(R.layout.shop_activity);
+                break;
+                case R.id.shop_cookie_counter:
+                    setContentView(R.layout.activity_main);
 
             }
         }
