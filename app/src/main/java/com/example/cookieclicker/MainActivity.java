@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = (TextView)findViewById(R.id.cookie_counter);
+        cookies = 0;
         cookiesPerSecond = 0;
+        Object cookieLock = new Object();
         autoClickers = new ArrayList<>();
         timerOn = false;
         setTimer();
@@ -46,8 +48,10 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void run() {
-                cookies += cookiesPerSecond;
-               displayCookies();
+                synchronized (cookieLock) {
+                    cookies += cookiesPerSecond;
+                    displayCookies();
+                }
             }
         };
         timer.schedule(timerTask, 0, 1000);
