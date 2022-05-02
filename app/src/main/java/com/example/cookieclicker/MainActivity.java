@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity{
     public Timer timer;
     public TimerTask timerTask;
     TextView cookieCounterTV;
-    TextView currentQuanityTV;
+    TextView currentQuantityTV;
     public boolean timerOn;
     public int cursors, grandmas, bakers;
     //how many cookies/sec each autoclicker gives
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity{
     public int currentQuantity;
     public boolean onShopScreen = false;
     public int cursorPrice, grandmaPrice, bakerPrice;
+    public Toast t = new Toast(this);
 
     Object cookieLock;
 
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity{
         cookies = 0;
 
         currentQuantity = 1;
-        currentQuanityTV = findViewById(R.id.quantity_text_view);
+        currentQuantityTV = findViewById(R.id.quantity_text_view);
 
         cursors = 0;
         grandmas = 0;
@@ -141,7 +143,9 @@ public class MainActivity extends AppCompatActivity{
                         cursors += currentQuantity;
                     }
                     else{
-                        //toast stuff
+
+                        t.setText("You don't have enough cookies to purchase this!");
+                        t.show();
                     }
                     break;
                 case R.id.buy_autoclicker_2:
@@ -151,7 +155,9 @@ public class MainActivity extends AppCompatActivity{
                         grandmas += currentQuantity;
                     }
                     else{
-                        //toast stuff;
+
+                        t.setText("You don't have enough cookies to purchase this!");
+                        t.show();
                     }
                     break;
                 case R.id.buy_autoclicker_3:
@@ -173,7 +179,9 @@ public class MainActivity extends AppCompatActivity{
                         currentQuantity--;
                     }
                     else{
-                        //toast stuff
+
+                        t.setText("You can't buy a negative quantity!");
+                        t.show();
                     }
                     break;
                 case R.id.decrease_quantity_five:
@@ -181,7 +189,9 @@ public class MainActivity extends AppCompatActivity{
                         currentQuantity -= 5;
                     }
                     else{
-                        //toast stuff
+
+                        t.setText("You can't buy a negative quantity!");
+                        t.show();
                     }
 
                     break;
@@ -243,7 +253,7 @@ public class MainActivity extends AppCompatActivity{
         @SuppressLint("SetTextI18n")
         public void displayCurrentQuantity(){
         try{
-            currentQuanityTV.setText(""+currentQuantity);
+            currentQuantityTV.setText(""+currentQuantity);
         } catch(Exception e){
 
             }
