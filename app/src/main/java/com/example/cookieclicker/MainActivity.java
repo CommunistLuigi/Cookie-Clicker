@@ -217,10 +217,14 @@ public class MainActivity extends AppCompatActivity{
                 grandmaPrice = Integer.parseInt(data[7]);
                 bakerPrice = Integer.parseInt(data[8]);
                 cookies += Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * cookiesPerSecond;
+                t.setText("Loaded from save file and updated you with an addtional " +
+                        Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * cookiesPerSecond + "cookies!");
+                t.show();
                 displayCookies();
                 //needs more to update buttons in shop :3
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                t.setText("Failed to load your save file! :(");
             }
         }
         }
