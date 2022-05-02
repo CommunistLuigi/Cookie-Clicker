@@ -1,13 +1,22 @@
 package com.example.cookieclicker;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -138,6 +147,46 @@ public class MainActivity extends AppCompatActivity{
                     break;
 
             }
+        }
+
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        protected void onStart(){
+        super.onStart();
+        File file = new File(this.getFilesDir(), "save.txt");
+        if(file.isFile()){
+            try(Scanner input = new Scanner(new FileInputStream(file))){
+                String[] data = input.nextLine().split(",");
+                cookies = Long.parseLong(data[0]);
+                cookiesPerClick = Integer.parseInt(data[1]);
+                cookiesPerSecond = Double.parseDouble(data[2]);
+                cursors = Integer.parseInt(data[3]);
+                grandmas = Integer.parseInt(data[4]);
+                bakers = Integer.parseInt(data[5]);
+                cursorPrice = Integer.parseInt(data[6]);
+                grandmaPrice = Integer.parseInt(data[7]);
+                bakerPrice = Integer.parseInt(data[8]);
+                cookies += Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * cookiesPerSecond;
+                displayCookies();
+                //needs more to update buttons in shop :3
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        }
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        protected void onStop(){
+        super.onStop();
+        File file = new File(this.getFilesDir(), "save.txt");
+        try(PrintWriter writer = new PrintWriter(file)){
+
+            writer.println(cookies + "," + cookiesPerClick + "," + cookiesPerClick + "," + cursors + "," + grandmas + ","
+            + bakers + "," + cursorPrice + "," + grandmaPrice + "," + bakerPrice + "," + Instant.now().toString());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         }
 
 
