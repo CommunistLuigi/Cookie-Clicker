@@ -28,23 +28,34 @@ public class MainActivity extends AppCompatActivity{
     //what the price of each autoclicker is multiplied by each time you buy one
     public final double PRICE_MULTIPLIER = 1.1;
     public boolean onShopScreen = false;
+    public int cursorPrice, grandmaPrice, bakerPrice;
 
     Object cookieLock;
 
-    ArrayList<Autoclicker> autoClickers;
-//    public MainActivity(){
-//
-//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = (TextView)findViewById(R.id.cookie_counter);
+
+
         cookies = 0;
-        cookiesPerSecond = 0;
+
+
+        cursors = 0;
+        grandmas = 0;
+        bakers = 0;
+
+        cursorPrice = cursors*PRICE_MULTIPLIER;
+
+        cookiesPerSecond = cursors*CURSOR_MULTIPLIER
+               + grandmas*GRANDMA_MULTIPLIER + bakers*BAKER_MULTIPLIER;
+
+
         cookieLock = new Object();
-        autoClickers = new ArrayList<>();
+
         timerOn = false;
         setTimer();
         timerTask = new TimerTask() {
