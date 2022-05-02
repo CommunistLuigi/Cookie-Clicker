@@ -48,10 +48,12 @@ public class MainActivity extends AppCompatActivity{
         grandmas = 0;
         bakers = 0;
 
-        cursorPrice = cursors*PRICE_MULTIPLIER;
+        cursorPrice = (int) (10 + cursors*PRICE_MULTIPLIER);
+        grandmaPrice = (int) (100 + grandmas*PRICE_MULTIPLIER);
+        bakerPrice = (int) (1000 + bakers*PRICE_MULTIPLIER);
 
-        cookiesPerSecond = cursors*CURSOR_MULTIPLIER
-               + grandmas*GRANDMA_MULTIPLIER + bakers*BAKER_MULTIPLIER;
+        cookiesPerSecond = cursors * CURSOR_MULTIPLIER
+                + (int) grandmas * GRANDMA_MULTIPLIER + (int) bakers * BAKER_MULTIPLIER;
 
 
         cookieLock = new Object();
@@ -115,9 +117,25 @@ public class MainActivity extends AppCompatActivity{
                     setContentView(R.layout.shop_activity);
                     onShopScreen = true;
                 break;
-                case R.id.shop_cookie_counter:
+                case R.id.back_to_main_button:
                     setContentView(R.layout.activity_main);
                     onShopScreen = false;
+
+                case R.id.buy_autoclicker_1:
+                    cookies -= cursorPrice;
+                    displayCookies();
+                    cursors++;
+                    break;
+                case R.id.buy_autoclicker_2:
+                    cookies -= grandmaPrice;
+                    displayCookies();
+                    grandmas++;
+                    break;
+                case R.id.buy_autoclicker_3:
+                    cookies -= bakerPrice;
+                    displayCookies();
+                    bakers++;
+                    break;
 
             }
         }
