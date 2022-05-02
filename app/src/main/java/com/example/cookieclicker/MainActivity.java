@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity{
     public double cookiesPerSecond;
     public Timer timer;
     public TimerTask timerTask;
-    TextView textView;
+    TextView cookieCounterTV;
+    TextView currentQuanityTV;
     public boolean timerOn;
     public int cursors, grandmas, bakers;
     //how many cookies/sec each autoclicker gives
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity{
     public final double BAKER_MULTIPLIER = 1;
     //what the price of each autoclicker is multiplied by each time you buy one
     public final double PRICE_MULTIPLIER = 1.1;
+    public int currentQuantity;
     public boolean onShopScreen = false;
     public int cursorPrice, grandmaPrice, bakerPrice;
 
@@ -47,11 +49,13 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = (TextView)findViewById(R.id.cookie_counter);
+        cookieCounterTV = findViewById(R.id.cookie_counter);
 
 
         cookies = 0;
 
+        currentQuantity = 1;
+        currentQuanityTV = findViewById(R.id.quantity_text_view);
 
         cursors = 0;
         grandmas = 0;
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity{
     @SuppressLint("SetTextI18n")
     public void displayCookies(){
         try {
-            textView.setText("" + cookies);
+           cookieCounterTV.setText("" + cookies);
         }
         catch(Exception e){
 
@@ -129,23 +133,58 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.back_to_main_button:
                     setContentView(R.layout.activity_main);
                     onShopScreen = false;
-
+                    break;
                 case R.id.buy_autoclicker_1:
-                    cookies -= cursorPrice;
-                    displayCookies();
-                    cursors++;
+                    if(cookies <= cursorPrice) {
+                        cookies -= cursorPrice;
+                        displayCookies();
+                        cursors += currentQuantity;
+                    }
+                    else{
+                        //toast stuff
+                    }
                     break;
                 case R.id.buy_autoclicker_2:
-                    cookies -= grandmaPrice;
-                    displayCookies();
-                    grandmas++;
+                    if(cookies <= grandmaPrice) {
+                        cookies -= grandmaPrice;
+                        displayCookies();
+                        grandmas += currentQuantity;
+                    }
+                    else{
+                        //toast stuff;
+                    }
                     break;
                 case R.id.buy_autoclicker_3:
                     cookies -= bakerPrice;
                     displayCookies();
-                    bakers++;
+                    bakers += currentQuantity;
                     break;
 
+                case R.id.increase_quantity:
+                    currentQuantity++;
+                    displayCurrentQuantity();
+                    break;
+                case R.id.increase_quantity_five:
+                    currentQuantity += 5;
+                    displayCurrentQuantity();
+                    break;
+                case R.id.decrease_quantity:
+                    if(currentQuantity != 0) {
+                        currentQuantity--;
+                    }
+                    else{
+                        //toast stuff
+                    }
+                    break;
+                case R.id.decrease_quantity_five:
+                    if(currentQuantity <= 5){
+                        currentQuantity -= 5;
+                    }
+                    else{
+                        //toast stuff
+                    }
+
+                    break;
             }
         }
 
@@ -189,6 +228,26 @@ public class MainActivity extends AppCompatActivity{
         }
         }
 
+        public void displayCursors(){
+
+        }
+
+        public void displayGrandmas(){
+
+        }
+
+        public void displayBakers(){
+
+        }
+
+        @SuppressLint("SetTextI18n")
+        public void displayCurrentQuantity(){
+        try{
+            currentQuanityTV.setText(""+currentQuantity);
+        } catch(Exception e){
+
+            }
+        }
 
     }
 
