@@ -7,6 +7,7 @@
     <!-- button to switch activities-->
     <Button
         android:id = "@+id/back_to_main_button"
+        android:text = "Back"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:onClick = "buttonPressed"
@@ -80,6 +81,8 @@
 
         <Button
             android:id = "@+id/buy_autoclicker_1"
+            android:layout_marginTop = "16dp"
+            android:layout_marginBottom = "16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="buttonPressed"
@@ -87,6 +90,7 @@
 
         <Button
             android:id = "@+id/buy_autoclicker_2"
+            android:layout_marginTop = "16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="buttonPressed"
@@ -94,6 +98,7 @@
 
         <Button
             android:id = "@+id/buy_autoclicker_3"
+            android:layout_marginTop = "16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="buttonPressed"
