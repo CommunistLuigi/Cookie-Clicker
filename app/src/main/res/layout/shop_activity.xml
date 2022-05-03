@@ -3,108 +3,158 @@
     xmlns:android = "http://schemas.android.com/apk/res/android"
     android:layout_width = "match_parent"
     android:layout_height = "match_parent"
-    android:layout_gravity = "center_horizontal"
     android:background = "@drawable/fortnite"
     >
+    <!-- layout for everything except the back button-->
 
-    <!-- button to switch activities-->
-    <Button
-        android:id = "@+id/back_to_main_button"
-        android:text = "Back"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:onClick = "buttonPressed"
-        android:layout_alignParentBottom = "true"
-         android:layout_centerHorizontal = "true"
-        />
-
-    <!-- shows how many cookies you have -->
-    <TextView
-        android:id = "@+id/shop_cookie_counter"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:text = "0"
-        android:layout_alignParentTop = "true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom = "8dp"
-        />
-
-    <!-- shows how many autoclickers you would currently buy-->
-    <TextView
-        android:id = "@+id/quantity_text_view"
-        android:text = "0"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:layout_below = "@id/shop_cookie_counter"
-        android:layout_marginRight = "8dp"
-        android:layout_marginLeft = "8dp"
-        />
-
-    <!-- buttons for changing how many autoclickers you want to buy-->
-    <Button
-        android:id = "@+id/decrease_quantity"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:onClick = "buttonPressed"
-        android:layout_alignLeft = "@id/quantity_text_view"
-        android:layout_marginLeft = "8dp"
-        />
-
-    <Button
-        android:id="@+id/decrease_quantity_five"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/decrease_quantity"
-        android:onClick="buttonPressed" />
-
-    <Button
-        android:id = "@+id/increase_quantity"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:onClick = "buttonPressed"
-        android:layout_alignRight = "@id/quantity_text_view"
-        android:layout_marginRight = "8dp"
-        />
-
-    <Button
-        android:id="@+id/increase_quantity_five"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@id/increase_quantity"
-        android:onClick="buttonPressed" />
-
-    <!-- buttons to buy autoclickers-->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below = "@id/quantity_text_view"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:orientation = "vertical"
         >
+
+        <!-- shows how many cookies you have -->
+        <TextView
+            android:text = "Cookies"
+            android:layout_height = "wrap_content"
+            android:layout_width = "wrap_content"
+            android:layout_gravity = "center_horizontal"
+            />
+
+        <TextView
+            android:id = "@+id/shop_cookie_counter"
+            android:text = "0"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "8dp"
+            android:layout_gravity = "center_horizontal"
+            />
+
+        <TextView
+            android:text = "Quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity = "center_horizontal"
+            />
+
+        <!--layout for all the things related to quantity-->
+
+        <LinearLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:orientation = "horizontal"
+            android:layout_gravity = "center_horizontal"
+            >
+
+            <View
+                android:layout_width = "0dp"
+                android:layout_height = "48dp"
+                android:layout_weight = "1"
+                />
+
+            <!-- buttons for decreasing how many autoclickers you want to buy-->
+
+            <Button
+                android:id = "@+id/decrease_quantity_five"
+                android:text = "-5"
+                android:onClick = "buttonPressed"
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                />
+
+            <Button
+                android:id = "@+id/decrease_quantity"
+                android:text = "-1"
+                android:onClick = "buttonPressed"
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                />
+
+            <!-- shows how many autoclickers you would currently buy-->
+
+            <TextView
+                android:id = "@+id/quantity_text_view"
+                android:text = "0"
+                android:textAlignment = "center"
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                />
+
+            <!-- buttons for increasing how many autoclickers you want to buy-->
+
+            <Button
+                android:id = "@+id/increase_quantity"
+                android:text = "+1"
+                android:onClick = "buttonPressed"
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id = "@+id/increase_quantity_five"
+                android:text = "+5"
+                android:onClick="buttonPressed"
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                />
+
+            <View
+                android:layout_width = "0dp"
+                android:layout_height = "48dp"
+                android:layout_weight = "1"
+                />
+
+        </LinearLayout>
+
+        <!-- buttons to buy autoclickers-->
 
         <Button
             android:id = "@+id/buy_autoclicker_1"
-            android:layout_marginTop = "16dp"
-            android:layout_marginBottom = "16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="buttonPressed"
+            android:text = "Buy autoclicker 1"
+            android:onClick = "buttonPressed"
+            android:layout_margin = "8dp"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_gravity = "center_horizontal"
             />
 
         <Button
             android:id = "@+id/buy_autoclicker_2"
-            android:layout_marginTop = "16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="buttonPressed"
+            android:onClick = "buttonPressed"
+            android:text = "Buy autoclicker 2"
+            android:layout_margin = "8dp"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_gravity = "center_horizontal"
             />
 
         <Button
             android:id = "@+id/buy_autoclicker_3"
-            android:layout_marginTop = "16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="buttonPressed"
+            android:onClick = "buttonPressed"
+            android:text = "Buy autoclicker 3"
+            android:layout_margin = "8dp"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_gravity = "center_horizontal"
             />
 
     </LinearLayout>
+
+    <!-- button to switch activities-->
+
+    <Button
+        android:id = "@+id/back_to_main_button"
+        android:text = "Back"
+        android:layout_alignParentBottom = "true"
+        android:layout_centerHorizontal = "true"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:onClick = "buttonPressed"
+        />
+
 </RelativeLayout>
