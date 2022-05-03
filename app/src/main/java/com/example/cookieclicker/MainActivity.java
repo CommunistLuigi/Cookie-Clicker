@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity{
     public int currentQuantity;
     public boolean onShopScreen = false;
     public int cursorPrice, grandmaPrice, bakerPrice;
-    public Toast t = new Toast(this);
+    public Toast t;
 
     Object cookieLock;
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cookieCounterTV = findViewById(R.id.cookie_counter);
-
+        t = new Toast(this);
 
         cookies = 0;
 
