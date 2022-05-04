@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.back_to_main_button:
                     setContentView(R.layout.activity_main);
                     displayCookies();
+                    cookieCounterTV = findViewById(R.id.cookie_counter);
                     onShopScreen = false;
                     break;
                 case R.id.buy_autoclicker_1:
@@ -275,4 +276,3 @@ public class MainActivity extends AppCompatActivity{
         }
 
     }
-
