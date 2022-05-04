@@ -135,7 +135,6 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.back_to_main_button:
                     setContentView(R.layout.activity_main);
                     displayCookies();
-                    cookieCounterTV = findViewById(R.id.cookie_counter);
                     onShopScreen = false;
                     break;
                 case R.id.buy_autoclicker_1:
@@ -223,7 +222,7 @@ public class MainActivity extends AppCompatActivity{
                 bakerPrice = Integer.parseInt(data[8]);
                 cookies += Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * cookiesPerSecond;
                 t.setText("Loaded from save file and updated you with an addtional " +
-                        Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * (int) cookiesPerSecond + "cookies!");
+                        Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * (int) cookiesPerSecond + " cookies!");
                 t.show();
                 displayCookies();
                 //needs more to update buttons in shop :3
@@ -276,3 +275,4 @@ public class MainActivity extends AppCompatActivity{
         }
 
     }
+
