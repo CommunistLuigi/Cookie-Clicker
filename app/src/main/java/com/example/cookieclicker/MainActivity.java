@@ -134,10 +134,11 @@ public class MainActivity extends AppCompatActivity{
                 break;
                 case R.id.back_to_main_button:
                     setContentView(R.layout.activity_main);
+                    displayCookies();
                     onShopScreen = false;
                     break;
                 case R.id.buy_autoclicker_1:
-                    if(cookies <= cursorPrice) {
+                    if(cookies >= cursorPrice) {
                         cookies -= cursorPrice;
                         displayCookies();
                         cursors += currentQuantity;
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity{
                     }
                     break;
                 case R.id.buy_autoclicker_2:
-                    if(cookies <= grandmaPrice) {
+                    if(cookies >= grandmaPrice) {
                         cookies -= grandmaPrice;
                         displayCookies();
                         grandmas += currentQuantity;
@@ -161,9 +162,12 @@ public class MainActivity extends AppCompatActivity{
                     }
                     break;
                 case R.id.buy_autoclicker_3:
-                    cookies -= bakerPrice;
-                    displayCookies();
+                    if(cookies >= bakerPrice) {
+                        cookies -= bakerPrice;
+                        displayCookies();
+                    }
                     bakers += currentQuantity;
+                    currentQuantity = 1;
                     break;
 
                 case R.id.increase_quantity:
@@ -218,7 +222,7 @@ public class MainActivity extends AppCompatActivity{
                 bakerPrice = Integer.parseInt(data[8]);
                 cookies += Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * cookiesPerSecond;
                 t.setText("Loaded from save file and updated you with an addtional " +
-                        Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * cookiesPerSecond + "cookies!");
+                        Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * (int) cookiesPerSecond + " cookies!");
                 t.show();
                 displayCookies();
                 //needs more to update buttons in shop :3
@@ -261,6 +265,13 @@ public class MainActivity extends AppCompatActivity{
         } catch(Exception e){
 
             }
+        }
+
+        @SuppressLint("SetTextI18n")
+        public void resetValues(){
+        cookieCounterTV.setText(""+cookies);
+
+
         }
 
     }
