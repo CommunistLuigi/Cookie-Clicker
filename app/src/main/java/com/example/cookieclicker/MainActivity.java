@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity{
         bakerPrice = (int) (1000 + bakers*PRICE_MULTIPLIER);
 
         cookiesPerSecond = cursors * CURSOR_MULTIPLIER
-                + (int) grandmas * GRANDMA_MULTIPLIER + (int) bakers * BAKER_MULTIPLIER;
+                + (int)( grandmas * GRANDMA_MULTIPLIER) + (int)( bakers * BAKER_MULTIPLIER);
 
 
         cookieLock = new Object();
@@ -134,7 +134,8 @@ public class MainActivity extends AppCompatActivity{
                 break;
                 case R.id.back_to_main_button:
                     setContentView(R.layout.activity_main);
-                    displayCookies();
+                   resetValues();
+
                     onShopScreen = false;
                     break;
                 case R.id.buy_autoclicker_1:
@@ -165,6 +166,10 @@ public class MainActivity extends AppCompatActivity{
                     if(cookies >= bakerPrice) {
                         cookies -= bakerPrice;
                         displayCookies();
+                    }
+                    else{
+                        t.setText("You don't have enough cookies to purchase this!");
+                        t.show();
                     }
                     bakers += currentQuantity;
                     currentQuantity = 1;
@@ -272,8 +277,13 @@ public class MainActivity extends AppCompatActivity{
 
         @SuppressLint("SetTextI18n")
         public void resetValues(){
-        cookieCounterTV.setText(""+cookies);
-
+        cookieCounterTV = findViewById(R.id.cookie_counter);
+        try {
+            cookieCounterTV.setText("" + cookies);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        displayCookies();
 
         }
 
