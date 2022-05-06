@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public int cursorPrice, grandmaPrice, bakerPrice;
     public Toast t;
 
-    public TextView cursorCounter, grandmaCounter, bakerCounter;
+    public TextView quantityTV, cursorCounter, grandmaCounter, bakerCounter;
 
     Object cookieLock;
 
@@ -209,22 +209,24 @@ public class MainActivity extends AppCompatActivity {
                 displayCurrentQuantity();
                 break;
             case R.id.decrease_quantity:
-                if (currentQuantity != 0) {
+                if (currentQuantity > 1) {
                     currentQuantity--;
                 } else {
 
                     t.setText("You can't buy a negative quantity!");
                     t.show();
                 }
+                displayCurrentQuantity();
                 break;
             case R.id.decrease_quantity_five:
-                if (currentQuantity <= 5) {
+                if (currentQuantity >= 5) {
                     currentQuantity -= 5;
                 } else {
 
                     t.setText("You can't buy a negative quantity!");
                     t.show();
                 }
+                displayCurrentQuantity();
 
                 break;
             case R.id.DaddyResetmyCookies:
@@ -294,6 +296,12 @@ public class MainActivity extends AppCompatActivity {
     public void displayCurrentQuantity() {
 
             currentQuantityTV.setText("" + currentQuantity);
+            if(currentQuantity == 69 || currentQuantity == 420){
+                quantityTV.setText("nice");
+            }
+            else{
+                quantityTV.setText("Quantity");
+            }
 
     }
 
@@ -311,9 +319,11 @@ public class MainActivity extends AppCompatActivity {
     public void setBuyScreenValues(){
         shopCookieCounterTV = findViewById(R.id.shop_cookie_counter);
         currentQuantityTV = findViewById(R.id.quantity_text_view);
+        currentQuantity = 1;
         cursorCounter = findViewById(R.id.Tier_1_AutoClicker);
         grandmaCounter = findViewById(R.id.Tier_2_AutoClicker);
         bakerCounter = findViewById(R.id.Tier_3_AutoClicker);
+        quantityTV = findViewById(R.id.QuantityTv);
 
 
     }
