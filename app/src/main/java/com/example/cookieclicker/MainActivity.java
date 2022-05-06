@@ -199,6 +199,9 @@ public class MainActivity extends AppCompatActivity{
                     }
 
                     break;
+                case R.id.DaddyResetmyCookies:
+                    daddyResetMyCookies();
+                    break;
             }
         }
 
@@ -221,7 +224,7 @@ public class MainActivity extends AppCompatActivity{
                 grandmaPrice = Integer.parseInt(data[7]);
                 bakerPrice = Integer.parseInt(data[8]);
                 cookies += Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * cookiesPerSecond;
-                t.setText("Loaded from save file and updated you with an addtional " +
+                t.setText("Loaded from save file and updated you with an additional " +
                         Duration.between(Instant.parse(data[9]), Instant.now()).getSeconds() * (int) cookiesPerSecond + " cookies!");
                 t.show();
                 displayCookies();
@@ -272,6 +275,16 @@ public class MainActivity extends AppCompatActivity{
         cookieCounterTV.setText(""+cookies);
 
 
+        }
+
+        public void daddyResetMyCookies(){
+            cursors = 0;
+            grandmas = 0;
+            bakers = 0;
+            cookies = 0;
+
+            currentQuantity = 1;
+            displayCookies();
         }
 
     }
