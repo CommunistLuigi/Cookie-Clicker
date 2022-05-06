@@ -21,7 +21,7 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     public long cookies = 0;
     public int cookiesPerClick = 1;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity{
     TextView cookieCounterTV;
     TextView currentQuantityTV;
     public boolean timerOn;
+    public TextView shopCookieCounterTV;
     public int cursors, grandmas, bakers;
     //how many cookies/sec each autoclicker gives
     public final double CURSOR_MULTIPLIER = 0.1;
@@ -43,8 +44,9 @@ public class MainActivity extends AppCompatActivity{
     public int cursorPrice, grandmaPrice, bakerPrice;
     public Toast t;
 
-    Object cookieLock;
+    public TextView cursorCounter, grandmaCounter, bakerCounter;
 
+    Object cookieLock;
 
 
     @Override
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cookieCounterTV = findViewById(R.id.cookie_counter);
+
         t = new Toast(this);
 
         cookies = 0;
@@ -63,26 +66,36 @@ public class MainActivity extends AppCompatActivity{
         grandmas = 0;
         bakers = 0;
 
-        cursorPrice = (int) (10 + cursors*PRICE_MULTIPLIER);
-        grandmaPrice = (int) (100 + grandmas*PRICE_MULTIPLIER);
-        bakerPrice = (int) (1000 + bakers*PRICE_MULTIPLIER);
+        cursorPrice = (int) (10 + cursors * PRICE_MULTIPLIER);
+        grandmaPrice = (int) (100 + grandmas * PRICE_MULTIPLIER);
+        bakerPrice = (int) (1000 + bakers * PRICE_MULTIPLIER);
 
         cookiesPerSecond = cursors * CURSOR_MULTIPLIER
-                + (int)( grandmas * GRANDMA_MULTIPLIER) + (int)( bakers * BAKER_MULTIPLIER);
+                + (int) (grandmas * GRANDMA_MULTIPLIER) + (int) (bakers * BAKER_MULTIPLIER);
 
 
-        cookieLock = new Object();
+        cookieLock = new Quack();
 
         timerOn = false;
         setTimer();
         timerTask = new TimerTask() {
 
             @Override
+
             public void run() {
-                synchronized (cookieLock) {
-                    cookies += cookiesPerSecond;
-                    displayCookies();
-                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        synchronized (cookieLock)
+
+                        {
+                            cookies += cookiesPerSecond;
+                            displayCookies();
+                        }
+                    }
+
+
+                });
             }
         };
         timer.schedule(timerTask, 0, 1000);
@@ -91,133 +104,143 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-
     @SuppressLint("SetTextI18n")
-    public void displayCookies(){
-        try {
-           cookieCounterTV.setText("" + cookies);
-        }
-        catch(Exception e){
+    public void displayCookies() {
 
-        }
+            if (!onShopScreen) {
+                try {
+
+                    cookieCounterTV.setText("" + cookies);
+                } catch (Exception e) {
+                    System.err.println("Theres errrrr");
+                }
+            } else {
+
+                shopCookieCounterTV.setText("" + cookies);
+
+            }
+
     }
 
-    public void setTimer(){
+
+    public void setTimer() {
         timer = new Timer();
 
     }
 
     @Override
     public void onBackPressed() {
-        if(onShopScreen){
+        if (onShopScreen) {
             setContentView(R.layout.activity_main);
             onShopScreen = false;
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
 
     }
 
     @SuppressLint("NonConstantResourceId")
-    public void buttonPressed(View view){
+    public void buttonPressed(View view) {
 
-            switch(view.getId()) {
+        switch (view.getId()) {
 
-                case R.id.cookie_button:
+            case R.id.cookie_button:
                 cookies += cookiesPerClick;
                 displayCookies();
                 break;
-                case R.id.buy_screen_button:
-                    setContentView(R.layout.shop_activity);
-                    onShopScreen = true;
+            case R.id.buy_screen_button:
+                setContentView(R.layout.shop_activity);
+                onShopScreen = true;
+                setBuyScreenValues();
+                displayCookies();
+
                 break;
-                case R.id.back_to_main_button:
-                    setContentView(R.layout.activity_main);
-                   resetValues();
+            case R.id.back_to_main_button:
+                setContentView(R.layout.activity_main);
+                onShopScreen = false;
+                setCookieScreenValues();
+                break;
+            case R.id.buy_autoclicker_1:
+                if (cookies >= (long) currentQuantity*cursorPrice) {
+                    cookies -= (long) currentQuantity*cursorPrice;
+                    displayCookies();
+                    cursors += currentQuantity;
+                    cookiesPerSecond = cursors * CURSOR_MULTIPLIER
+                            + (int) (grandmas * GRANDMA_MULTIPLIER) + (int) (bakers * BAKER_MULTIPLIER);
+                } else {
 
-                    onShopScreen = false;
-                    break;
-                case R.id.buy_autoclicker_1:
-                    if(cookies >= cursorPrice) {
-                        cookies -= cursorPrice;
-                        displayCookies();
-                        cursors += currentQuantity;
-                    }
-                    else{
+                    t.setText("You don't have enough cookies to purchase this!");
+                    t.show();
+                }
+                break;
+            case R.id.buy_autoclicker_2:
+                if (cookies >= (long) currentQuantity*grandmaPrice) {
+                    cookies -= (long) currentQuantity*grandmaPrice;
+                    displayCookies();
+                    grandmas += currentQuantity;
+                    cookiesPerSecond = cursors * CURSOR_MULTIPLIER
+                            + (int) (grandmas * GRANDMA_MULTIPLIER) + (int) (bakers * BAKER_MULTIPLIER);
+                } else {
 
-                        t.setText("You don't have enough cookies to purchase this!");
-                        t.show();
-                    }
-                    break;
-                case R.id.buy_autoclicker_2:
-                    if(cookies >= grandmaPrice) {
-                        cookies -= grandmaPrice;
-                        displayCookies();
-                        grandmas += currentQuantity;
-                    }
-                    else{
+                    t.setText("You don't have enough cookies to purchase this!");
+                    t.show();
+                }
+                break;
+            case R.id.buy_autoclicker_3:
+                if (cookies >= (long) currentQuantity *bakerPrice) {
+                    cookies -= (long) currentQuantity*bakerPrice;
+                    displayCookies();
+                } else {
+                    t.setText("You don't have enough cookies to purchase this!");
+                    t.show();
+                }
+                bakers += currentQuantity;
 
-                        t.setText("You don't have enough cookies to purchase this!");
-                        t.show();
-                    }
-                    break;
-                case R.id.buy_autoclicker_3:
-                    if(cookies >= bakerPrice) {
-                        cookies -= bakerPrice;
-                        displayCookies();
-                    }
-                    else{
-                        t.setText("You don't have enough cookies to purchase this!");
-                        t.show();
-                    }
-                    bakers += currentQuantity;
-                    currentQuantity = 1;
-                    break;
+                cookiesPerSecond = cursors * CURSOR_MULTIPLIER
+                        + (int) (grandmas * GRANDMA_MULTIPLIER) + (int) (bakers * BAKER_MULTIPLIER);
+                break;
 
-                case R.id.increase_quantity:
-                    currentQuantity++;
-                    displayCurrentQuantity();
-                    break;
-                case R.id.increase_quantity_five:
-                    currentQuantity += 5;
-                    displayCurrentQuantity();
-                    break;
-                case R.id.decrease_quantity:
-                    if(currentQuantity != 0) {
-                        currentQuantity--;
-                    }
-                    else{
+            case R.id.increase_quantity:
+                currentQuantity++;
+                displayCurrentQuantity();
+                break;
+            case R.id.increase_quantity_five:
+                currentQuantity += 5;
+                displayCurrentQuantity();
+                break;
+            case R.id.decrease_quantity:
+                if (currentQuantity != 0) {
+                    currentQuantity--;
+                } else {
 
-                        t.setText("You can't buy a negative quantity!");
-                        t.show();
-                    }
-                    break;
-                case R.id.decrease_quantity_five:
-                    if(currentQuantity <= 5){
-                        currentQuantity -= 5;
-                    }
-                    else{
+                    t.setText("You can't buy a negative quantity!");
+                    t.show();
+                }
+                break;
+            case R.id.decrease_quantity_five:
+                if (currentQuantity <= 5) {
+                    currentQuantity -= 5;
+                } else {
 
-                        t.setText("You can't buy a negative quantity!");
-                        t.show();
-                    }
+                    t.setText("You can't buy a negative quantity!");
+                    t.show();
+                }
 
-                    break;
-                case R.id.DaddyResetmyCookies:
-                    daddyResetMyCookies();
-                    break;
-            }
+                break;
+            case R.id.DaddyResetmyCookies:
+                daddyResetMyCookies();
+                break;
         }
+    }
 
 
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        protected void onStart(){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onStart() {
         super.onStart();
         File file = new File(this.getFilesDir(), "save.txt");
-        if(file.isFile()){
-            try(Scanner input = new Scanner(new FileInputStream(file))){
+        if (file.isFile()) {
+            try (Scanner input = new Scanner(new FileInputStream(file))) {
                 String[] data = input.nextLine().split(",");
                 cookies = Long.parseLong(data[0]);
                 cookiesPerClick = Integer.parseInt(data[1]);
@@ -239,63 +262,73 @@ public class MainActivity extends AppCompatActivity{
                 t.setText("Failed to load your save file! :(");
             }
         }
-        }
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        protected void onStop(){
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onStop() {
         super.onStop();
         File file = new File(this.getFilesDir(), "save.txt");
-        try(PrintWriter writer = new PrintWriter(file)){
+        try (PrintWriter writer = new PrintWriter(file)) {
 
-            writer.println(cookies + "," + cookiesPerClick + "," + cookiesPerClick + "," + cursors + "," + grandmas + ","
-            + bakers + "," + cursorPrice + "," + grandmaPrice + "," + bakerPrice + "," + Instant.now().toString());
+            writer.println(cookies + "," + cookiesPerClick + "," + cookiesPerSecond + "," + cursors + "," + grandmas + ","
+                    + bakers + "," + cursorPrice + "," + grandmaPrice + "," + bakerPrice + "," + Instant.now().toString());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        }
+    }
 
-        public void displayCursors(){
+    public void displayCursors() {
 
-        }
+    }
 
-        public void displayGrandmas(){
+    public void displayGrandmas() {
 
-        }
+    }
 
-        public void displayBakers(){
+    public void displayBakers() {
 
-        }
+    }
 
-        @SuppressLint("SetTextI18n")
-        public void displayCurrentQuantity(){
-        try{
-            currentQuantityTV.setText(""+currentQuantity);
-        } catch(Exception e){
+    @SuppressLint("SetTextI18n")
+    public void displayCurrentQuantity() {
 
-            }
-        }
+            currentQuantityTV.setText("" + currentQuantity);
 
-        @SuppressLint("SetTextI18n")
-        public void resetValues(){
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void setCookieScreenValues() {
         cookieCounterTV = findViewById(R.id.cookie_counter);
         try {
             cookieCounterTV.setText("" + cookies);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         displayCookies();
 
-        }
+    }
+    public void setBuyScreenValues(){
+        shopCookieCounterTV = findViewById(R.id.shop_cookie_counter);
+        currentQuantityTV = findViewById(R.id.quantity_text_view);
+        cursorCounter = findViewById(R.id.)
 
-        public void daddyResetMyCookies(){
+    }
+
+    public void daddyResetMyCookies() {
+
+        synchronized (cookieLock) {
             cursors = 0;
             grandmas = 0;
             bakers = 0;
             cookies = 0;
 
+
             currentQuantity = 1;
+
             displayCookies();
         }
-
     }
+
+}
 
