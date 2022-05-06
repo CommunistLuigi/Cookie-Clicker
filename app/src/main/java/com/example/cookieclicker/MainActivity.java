@@ -311,7 +311,10 @@ public class MainActivity extends AppCompatActivity {
     public void setBuyScreenValues(){
         shopCookieCounterTV = findViewById(R.id.shop_cookie_counter);
         currentQuantityTV = findViewById(R.id.quantity_text_view);
-        cursorCounter = findViewById(R.id.)
+        cursorCounter = findViewById(R.id.Tier_1_AutoClicker);
+        grandmaCounter = findViewById(R.id.Tier_2_AutoClicker);
+        bakerCounter = findViewById(R.id.Tier_3_AutoClicker);
+
 
     }
 
