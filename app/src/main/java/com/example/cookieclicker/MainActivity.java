@@ -70,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
         grandmaPrice = (int) (100 + grandmas * PRICE_MULTIPLIER);
         bakerPrice = (int) (1000 + bakers * PRICE_MULTIPLIER);
 
+        cookieCounterTV = findViewById(R.id.cookie_counter);
+        cursorCounter = findViewById(R.id.Tier_1_AutoClicker);
+        grandmaCounter = findViewById(R.id.Tier_2_AutoClicker);
+        bakerCounter = findViewById(R.id.Tier_3_AutoClicker);
+
         cookiesPerSecond = cursors * CURSOR_MULTIPLIER
                 + (int) (grandmas * GRANDMA_MULTIPLIER) + (int) (bakers * BAKER_MULTIPLIER);
 
@@ -280,16 +285,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public void displayCursors() {
 
+            cursorCounter.setText("You have " + cursors + "cursors");
+
     }
 
+    @SuppressLint("SetTextI18n")
     public void displayGrandmas() {
 
+    grandmaCounter.setText("You have " + grandmas + "grandmas");
     }
 
+    @SuppressLint("SetTextI18n")
     public void displayBakers() {
-
+    bakerCounter.setText("You have " + bakers + "bakers");
     }
 
     @SuppressLint("SetTextI18n")
@@ -308,21 +319,25 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void setCookieScreenValues() {
         cookieCounterTV = findViewById(R.id.cookie_counter);
+        cursorCounter = findViewById(R.id.Tier_1_AutoClicker);
+        grandmaCounter = findViewById(R.id.Tier_2_AutoClicker);
+        bakerCounter = findViewById(R.id.Tier_3_AutoClicker);
         try {
             cookieCounterTV.setText("" + cookies);
         } catch (Exception e) {
             e.printStackTrace();
         }
         displayCookies();
+        displayCursors();
+        displayGrandmas();
+        displayBakers();
 
     }
     public void setBuyScreenValues(){
         shopCookieCounterTV = findViewById(R.id.shop_cookie_counter);
         currentQuantityTV = findViewById(R.id.quantity_text_view);
         currentQuantity = 1;
-        cursorCounter = findViewById(R.id.Tier_1_AutoClicker);
-        grandmaCounter = findViewById(R.id.Tier_2_AutoClicker);
-        bakerCounter = findViewById(R.id.Tier_3_AutoClicker);
+
         quantityTV = findViewById(R.id.QuantityTv);
 
 
@@ -342,6 +357,5 @@ public class MainActivity extends AppCompatActivity {
             displayCookies();
         }
     }
-
 }
 
