@@ -23,16 +23,19 @@
         android:id = "@+id/Tier_1_AutoClicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:text="0"/>
     <TextView
         android:id = "@+id/Tier_2_AutoClicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:text="0"/>
     <TextView
         android:id = "@+id/Tier_3_AutoClicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:text="0"/>
 
 
