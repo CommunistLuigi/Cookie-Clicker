@@ -288,19 +288,19 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void displayCursors() {
 
-            cursorCounter.setText("You have " + cursors + "cursors");
+            cursorCounter.setText("Cursors: " + cursors);
 
     }
 
     @SuppressLint("SetTextI18n")
     public void displayGrandmas() {
 
-    grandmaCounter.setText("You have " + grandmas + "grandmas");
+    grandmaCounter.setText("Grandmas: " + grandmas);
     }
 
     @SuppressLint("SetTextI18n")
     public void displayBakers() {
-    bakerCounter.setText("You have " + bakers + "bakers");
+    bakerCounter.setText("Bakers: " + bakers);
     }
 
     @SuppressLint("SetTextI18n")
