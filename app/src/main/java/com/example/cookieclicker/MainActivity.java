@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView quantityTV, cursorCounter, grandmaCounter, bakerCounter;
 
     Object cookieLock;
+    public ImageView cookieImage;
 
 
     @Override
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cookieCounterTV = findViewById(R.id.cookie_counter);
+        cookieImage = findViewById(R.id.cookie_button);
 
         t = new Toast(this);
 
@@ -246,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         File file = new File(this.getFilesDir(), "save.txt");
+
         if (file.isFile()) {
             try (Scanner input = new Scanner(new FileInputStream(file))) {
                 String[] data = input.nextLine().split(",");
@@ -268,7 +272,12 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
                 t.setText("Failed to load your save file! :(");
             }
+
         }
+
+        displayCursors();
+        displayBakers();
+        displayGrandmas();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

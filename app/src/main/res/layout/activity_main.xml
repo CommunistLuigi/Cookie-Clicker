@@ -8,14 +8,17 @@
         android:id = "@+id/cookie_counter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
         android:textSize="32sp"
         android:text="0"
          />
-    <Button
+    <ImageButton
         android:id = "@+id/cookie_button"
-        android:text="POW"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/superspecialgoodbestcookies"
+        android:background="#80000000"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:onClick="buttonPressed"
         android:layout_centerInParent="true"
         />
@@ -24,6 +27,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
+    android:orientation="vertical"
     android:layout_centerVertical="true" >
     <TextView
         android:id = "@+id/Tier_1_AutoClicker"
